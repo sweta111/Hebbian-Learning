@@ -111,6 +111,8 @@ if (ques == 3)
 end
 
 % Retrieve
+% At each iteration retrieve image is same, that means error will not be
+% reduced
 for n = 1:1:size(y,3)
     for iter = 1:1:50
         % Generate random element for the asynchronous correction
