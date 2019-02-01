@@ -1,8 +1,8 @@
 clear all 
 close all
 %loading images
-mona = load('C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\mona.txt');
-cat = load('C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\cat.txt');
+mona = load('D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\mona.txt');
+cat = load('D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\cat.txt');
 %change cat in binary format
 cat1 = reshape(cat,9000,1);
 
@@ -12,7 +12,7 @@ cat1(find(cat1<=0),:) = -1;
 
 cat = reshape(cat1,90,100);
 
-ball = load('C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\ball.txt');
+ball = load('D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\ball.txt');
 
 x(:,:,1) = ball;
 x(:,:,2) = cat;
@@ -28,7 +28,7 @@ ques = input(prompt)
 
 if (ques == 1)
     %path for result
-    path = 'C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\Results\Result_1_b';
+    path = 'D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\Hebbian_Learning\Results\Result_1_b';
     %prepare trigger images for ques 1
     mona(20:50,20:50)=-1;
     cat(20:50,20:50)=-1;
@@ -43,7 +43,7 @@ if (ques == 1)
     trigger(3,:) = reshape(y(:,:,3), 1, 9000);
 else
     %path for result
-    path = 'C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\Results\Result_2_a_b_c_3_a_b';
+    path = 'D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\Hebbian_Learning\Results\Result_2_a_b_c_3_a_b';
     %prepare trigger images for question 2 or 3
     z = zeros(90,100);
 
@@ -87,15 +87,15 @@ if (ques == 3)
     X = input(prompt);
     if(X==25)
         %path for result
-        path = 'C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\Results\Result_3_c\Result_X_25_1';
+        path = 'D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\Hebbian_Learning\Results\Result_3_c\Result_X_25_1';
     end
     if(X==50)
         %path for result
-        path = 'C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\Results\Result_3_c\Result_X_50_1';
+        path = 'D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\Hebbian_Learning\Results\Result_3_c\Result_X_50_1';
     end
     if(X == 80)
         %path for result
-    path = 'C:\Users\Niraj\Documents\MATLAB\BT6270_Assignment_4\BT6270_Assignment_4\Results\Result_3_c\Result_X_80_1';
+    path = 'D:\Sweta\Ph.D\Course_work\1st_year\CNS_assignments\BT6270_Assignment_4\Hebbian_Learning\Results\Result_3_c\Result_X_80_1';
     end
   
     %save the previous weights
@@ -125,14 +125,14 @@ for n = 1:1:size(y,3)
         retrieved(n,i) = sign(sum);
         end
     
-        rms(n,iter) = sqrt((mean((train(n,:)-trigger(n,:)).^2))); 
+        rms(n,iter) = sqrt((mean((train(n,:)-retrieved(n,:)).^2))); 
     end
 end
 
 %plotting and saving the patch and retrieved images
 for k = 1:3
 saveas(imshow(y(:,:,k)),fullfile(path,['trigger' num2str(k) '.jpg']));
-saveas(imshow(reshape(trigger(k,:), 90, 100)),fullfile(path,['retrieve' num2str(k) '.jpg']));
+saveas(imshow(reshape(retrieved(k,:), 90, 100)),fullfile(path,['retrieve' num2str(k) '.jpg']));
 end
 
 %plotting and saving the rms 
